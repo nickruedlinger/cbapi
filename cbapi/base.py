@@ -125,8 +125,9 @@ def get_organizations(updated_since = None, query = None, name = None,
             df = df.append(page_list[i], ignore_index=True)
     
     # change timestamps to datetime dates
-    for col in ["created_at", "updated_at"]:
-        df[col] = df[col].apply(timestamp2datetime)
+    if df.shape[0] > 0:
+        for col in ["created_at", "updated_at"]:
+            df[col] = df[col].apply(timestamp2datetime)
     
     return df
 
@@ -174,8 +175,9 @@ def get_people(name = None, query = None, updated_since = None,
             thread_list[i].join()
             df = df.append(page_list[i], ignore_index=True)
     
-        # change timestamps to datetime dates
-    for col in ["created_at", "updated_at"]:
-        df[col] = df[col].apply(timestamp2datetime)
+    # change timestamps to datetime dates
+    if df.shape[0] > 0:
+        for col in ["created_at", "updated_at"]:
+            df[col] = df[col].apply(timestamp2datetime)
     
     return df
